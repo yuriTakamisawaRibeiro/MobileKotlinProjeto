@@ -10,6 +10,15 @@
     android:padding="20dp"
     tools:context=".activities.LoginActivity">
 
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Login"
+        android:gravity="center_horizontal"
+        android:textSize="40dp"
+        android:textColor="@color/black"/>
+
     <EditText
         android:id="@+id/login_email"
         android:layout_width="350dp"
