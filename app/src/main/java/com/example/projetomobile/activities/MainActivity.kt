@@ -1,4 +1,4 @@
-package com.example.projetomobile
+package com.example.projetomobile.activities
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -36,6 +36,14 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.example.projetomobile.screens.Delete
+import com.example.projetomobile.screens.Home
+import com.example.projetomobile.screens.PostPet
+import com.example.projetomobile.screens.PostProduct
+import com.example.projetomobile.screens.PostReview
+import com.example.projetomobile.screens.Profile
+import com.example.projetomobile.screens.Screens
+import com.example.projetomobile.screens.Search
 import com.example.projetomobile.ui.theme.GreenJC
 import com.example.projetomobile.ui.theme.ProjetomobileTheme
 

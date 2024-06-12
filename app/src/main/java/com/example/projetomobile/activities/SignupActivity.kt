@@ -1,4 +1,4 @@
-package com.example.projetomobile
+package com.example.projetomobile.activities
 
 import android.content.Intent
 import android.os.Bundle

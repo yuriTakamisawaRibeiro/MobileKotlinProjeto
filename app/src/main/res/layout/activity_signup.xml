@@ -5,10 +5,10 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginTop="250dp"
     android:orientation="vertical"
+    android:gravity="center_vertical|center_horizontal"
     android:padding="20dp"
-    tools:context=".SignupActivity">
+    tools:context=".activities.SignupActivity">
 
     <EditText
         android:id="@+id/signup_email"
@@ -61,7 +61,6 @@
         android:layout_height="wrap_content"
         android:text="Já tem uma conta? Faça login"
         android:layout_marginTop="8dp"
-
         android:textSize="18dp"
         android:gravity="center"/>
 
