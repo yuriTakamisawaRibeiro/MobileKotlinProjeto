@@ -31,7 +31,8 @@
         android:textColor="@color/black"
         android:layout_marginTop="26dp"
         android:text=""
-        android:textSize="26dp"/>
+        android:textSize="26dp"
+        android:enabled="false"/>
 
 
 
