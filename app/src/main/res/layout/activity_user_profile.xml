@@ -18,7 +18,7 @@
         android:layout_height="wrap_content"
         android:text="Perfil"
         android:gravity="center_horizontal"
-        android:textSize="40dp"
+        android:textSize="40sp"
         android:textColor="@color/black"
         />
 
@@ -31,35 +31,40 @@
         android:textColor="@color/black"
         android:layout_marginTop="26dp"
         android:text=""
-        android:textSize="26dp"
+        android:textSize="26sp"
         android:enabled="false"/>
-
-
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginTop="30dp"
-        android:weightSum="2">
+        android:orientation="vertical"
+        android:layout_marginTop="30dp">
+
+
+        <Button
+            android:id="@+id/buttonUpdateEmail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Atualizar Email"
+            android:backgroundTint="@color/green"/>
+
+
+        <Button
+            android:id="@+id/buttonUpdatePassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:text="Atualizar Senha"
+            android:backgroundTint="@color/green"/>
 
         <Button
             android:id="@+id/buttonLogout"
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:layout_marginRight="10dp"
+            android:layout_marginBottom="10dp"
             android:text="Logout"
             android:backgroundTint="@color/green"/>
-
-        <Button
-            android:id="@+id/buttonUpdate"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:layout_marginLeft="10dp"
-            android:text="Atualizar"
-            android:backgroundTint="@color/green"/>
     </LinearLayout>
-
 </LinearLayout>

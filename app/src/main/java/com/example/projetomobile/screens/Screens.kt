@@ -9,5 +9,4 @@ sealed class Screens (val screen : String) {
     data object PostPet : Screens("postPet")
     data object PostReview : Screens("postReview")
 
-
 }
