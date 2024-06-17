@@ -60,11 +60,21 @@
             android:backgroundTint="@color/green"/>
 
         <Button
-            android:id="@+id/buttonLogout"
+            android:id="@+id/buttonAdvancedSettings"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
+            android:text="Configurações Avançadas"
+            android:backgroundTint="@color/green"/>
+
+        <Button
+            android:id="@+id/buttonLogout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
             android:text="Logout"
             android:backgroundTint="@color/green"/>
+
+
     </LinearLayout>
 </LinearLayout>

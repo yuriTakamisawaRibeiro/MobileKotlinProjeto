@@ -1,6 +1,7 @@
 package com.example.projetomobile.inflaters
 
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
@@ -20,6 +21,9 @@ import com.example.projetomobile.activities.UpdateEmailActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import androidx.core.content.ContextCompat.startActivity
+import com.example.projetomobile.activities.AdvancedSettingsActivity
+import com.example.projetomobile.activities.LoginActivity
+import com.example.projetomobile.activities.UpdatePasswordActivity
 
 @Composable
 fun UserProfileXmlLayout() {
@@ -51,8 +55,24 @@ fun UserProfileXmlLayout() {
         val updateEmailButton = view.findViewById<Button>(R.id.buttonUpdateEmail)
         updateEmailButton.setOnClickListener {
             val intent = Intent(context, UpdateEmailActivity::class.java)
-            // Inicia a atividade para atualizar o e-mail
             updateEmailLauncher.launch(intent)
+        }
+
+        val updatePasswordButton = view.findViewById<Button>(R.id.buttonUpdatePassword)
+        updatePasswordButton.setOnClickListener{
+            val intent = Intent(context, UpdatePasswordActivity::class.java)
+            startActivity(context, intent, null)
+        }
+
+        val logoutButton = view.findViewById<Button>(R.id.buttonLogout)
+        logoutButton.setOnClickListener {
+            handleLogoutClick(context)
+        }
+
+        val advancedSettingsButton = view.findViewById<Button>(R.id.buttonAdvancedSettings)
+        advancedSettingsButton.setOnClickListener {
+            val intent = Intent(context, AdvancedSettingsActivity::class.java)
+            startActivity(context, intent, null)
         }
 
         view
@@ -71,4 +91,12 @@ private fun getUserProfileEmail(view: View, currentUser: FirebaseUser?) {
     currentUser?.let {
         updateEmailInView(view, it.email ?: "")
     }
+}
+
+private fun handleLogoutClick(context : Context) {
+    FirebaseAuth.getInstance().signOut()
+
+    val loginIntent = Intent(context, LoginActivity::class.java)
+    loginIntent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+    context.startActivity(loginIntent)
 }
