@@ -54,27 +54,42 @@ class UpdateEmailActivity : AppCompatActivity() {
 
             user.reauthenticate(credential).addOnCompleteListener { reauthTask ->
                 if (reauthTask.isSuccessful) {
-                    // Enviar link de verificação para o novo e-mail
-                    user.verifyBeforeUpdateEmail(newEmail).addOnCompleteListener { verifyTask ->
-                        if (verifyTask.isSuccessful) {
-                            // Se a verificação for bem-sucedida, atualizar o e-mail
-                            user.updateEmail(newEmail).addOnCompleteListener { updateTask ->
-                                if (updateTask.isSuccessful) {
-                                    Toast.makeText(this, "E-mail atualizado com sucesso.", Toast.LENGTH_SHORT).show()
-                                    val resultIntent = Intent()
-                                    resultIntent.putExtra("updated_email", newEmail)
-                                    setResult(Activity.RESULT_OK, resultIntent)
-                                    finish()
-                                } else {
-                                    // Tratar possíveis erros na atualização do e-mail
-                                    val errorMessage = updateTask.exception?.message?: "Erro desconhecido"
-                                    Toast.makeText(this, "Falha ao atualizar e-mail: $errorMessage", Toast.LENGTH_SHORT).show()
+                    // Verificar se o novo e-mail já está em uso
+                    FirebaseAuth.getInstance().fetchSignInMethodsForEmail(newEmail).addOnCompleteListener { fetchTask ->
+                        if (fetchTask.isSuccessful) {
+                            val signInMethods = fetchTask.result.signInMethods
+                            if (signInMethods.isNullOrEmpty() || signInMethods.contains("password")) {
+                                // O e-mail não está em uso ou é o mesmo do usuário atual
+                                user.verifyBeforeUpdateEmail(newEmail).addOnCompleteListener { verifyTask ->
+                                    if (verifyTask.isSuccessful) {
+                                        // Se a verificação for bem-sucedida, atualizar o e-mail
+                                        user.updateEmail(newEmail).addOnCompleteListener { updateTask ->
+                                            if (updateTask.isSuccessful) {
+                                                Toast.makeText(this, "E-mail atualizado com sucesso.", Toast.LENGTH_SHORT).show()
+                                                val resultIntent = Intent()
+                                                resultIntent.putExtra("updated_email", newEmail)
+                                                setResult(Activity.RESULT_OK, resultIntent)
+                                                finish()
+                                            } else {
+                                                // Tratar possíveis erros na atualização do e-mail
+                                                val errorMessage = updateTask.exception?.message?: "Erro desconhecido"
+                                                Toast.makeText(this, "Falha ao atualizar e-mail: $errorMessage", Toast.LENGTH_SHORT).show()
+                                            }
+                                        }
+                                    } else {
+                                        // Tratar falhas na verificação do novo e-mail
+                                        val errorMessage = verifyTask.exception?.message?: "Erro ao verificar novo e-mail."
+                                        Toast.makeText(this, "Falha na verificação do novo e-mail: $errorMessage", Toast.LENGTH_SHORT).show()
+                                    }
                                 }
+                            } else {
+                                // O e-mail já está em uso por outro usuário
+                                Toast.makeText(this, "O e-mail já está em uso por outro usuário.", Toast.LENGTH_SHORT).show()
                             }
                         } else {
-                            // Tratar falhas na verificação do novo e-mail
-                            val errorMessage = verifyTask.exception?.message?: "Erro ao verificar novo e-mail."
-                            Toast.makeText(this, "Falha na verificação do novo e-mail: $errorMessage", Toast.LENGTH_SHORT).show()
+                            // Tratar erros na busca de métodos de login
+                            val errorMessage = fetchTask.exception?.message?: "Erro ao verificar disponibilidade do e-mail."
+                            Toast.makeText(this, "Falha ao verificar disponibilidade do e-mail: $errorMessage", Toast.LENGTH_SHORT).show()
                         }
                     }
                 } else {
@@ -87,5 +102,6 @@ class UpdateEmailActivity : AppCompatActivity() {
             Toast.makeText(this, "Nenhum usuário autenticado.", Toast.LENGTH_SHORT).show()
         }
     }
+
 
 }

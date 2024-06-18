@@ -33,6 +33,8 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
+import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
@@ -56,7 +58,8 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    MyBottomAppBar()
+                    val navController = rememberNavController() as NavHostController
+                    MyBottomAppBar(navController = navController)
                 }
             }
         }
@@ -65,15 +68,14 @@ class MainActivity : ComponentActivity() {
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun MyBottomAppBar() {
-    val navigationController = rememberNavController()
+fun MyBottomAppBar(navController: NavHostController) {
     val context = LocalContext.current.applicationContext
     val selected = remember {
         mutableStateOf(Icons.Default.Home)
     }
 
     val sheetState = rememberModalBottomSheetState()
-    var showBottomSheet by remember { mutableStateOf(false) }  // Usando `by` para delegar corretamente o `MutableState`
+    var showBottomSheet by remember { mutableStateOf(false) }
 
     Scaffold(
         bottomBar = {
@@ -83,7 +85,7 @@ fun MyBottomAppBar() {
                 IconButton(
                     onClick = {
                         selected.value = Icons.Default.Home
-                        navigationController.navigate(Screens.Home.screen) {
+                        navController.navigate(Screens.Home.screen) {
                             popUpTo(0)
                         }
                     },
@@ -100,7 +102,7 @@ fun MyBottomAppBar() {
                 IconButton(
                     onClick = {
                         selected.value = Icons.Default.Search
-                        navigationController.navigate(Screens.Search.screen) {
+                        navController.navigate(Screens.Search.screen) {
                             popUpTo(0)
                         }
                     },
@@ -117,7 +119,7 @@ fun MyBottomAppBar() {
                 Box(modifier = Modifier
                     .weight(1f)
                     .padding(16.dp), contentAlignment = Alignment.Center) {
-                    FloatingActionButton(onClick = { showBottomSheet = true }) { // Corrigido: showBottomSheet = true
+                    FloatingActionButton(onClick = { showBottomSheet = true }) {
                         Icon(Icons.Default.Add, contentDescription = null, tint = GreenJC)
                     }
                 }
@@ -125,7 +127,7 @@ fun MyBottomAppBar() {
                 IconButton(
                     onClick = {
                         selected.value = Icons.Default.Delete
-                        navigationController.navigate(Screens.Delete.screen) {
+                        navController.navigate(Screens.Delete.screen) {
                             popUpTo(0)
                         }
                     },
@@ -142,7 +144,7 @@ fun MyBottomAppBar() {
                 IconButton(
                     onClick = {
                         selected.value = Icons.Default.Person
-                        navigationController.navigate(Screens.Profile.screen) {
+                        navController.navigate(Screens.Profile.screen) {
                             popUpTo(0)
                         }
                     },
@@ -158,45 +160,43 @@ fun MyBottomAppBar() {
             }
         }
     ) { paddingValues ->
-        NavHost(navController = navigationController, startDestination = Screens.Home.screen, modifier = Modifier.padding(paddingValues)) {
-            composable(Screens.Home.screen) { Home() }
-            composable(Screens.Search.screen) { Search() }
-            composable(Screens.Delete.screen) { Delete() }
-            composable(Screens.Profile.screen) { Profile() }
+        NavHost(navController = navController, startDestination = Screens.Home.screen, modifier = Modifier.padding(paddingValues)) {
+            composable(Screens.Home.screen) { Home(navController) }
+            composable(Screens.Search.screen) { Search(navController) }
+            composable(Screens.Delete.screen) { Delete(navController) }
+            composable(Screens.Profile.screen) { Profile(navController) }
 
-            composable(Screens.PostProduct.screen) { PostProduct() }
-            composable(Screens.PostPet.screen) { PostPet() }
-            composable(Screens.PostReview.screen) { PostReview() }
-
+            composable(Screens.PostProduct.screen) { PostProduct(navController) }
+            composable(Screens.PostPet.screen) { PostPet(navController) }
+            composable(Screens.PostReview.screen) { PostReview(navController) }
         }
     }
 
     if (showBottomSheet) {
         ModalBottomSheet(
-            onDismissRequest = { showBottomSheet = false },  // Correção: Usando `showBottomSheet = false` para fechar o Bottom Sheet
-            sheetState = sheetState  // Corrigido: Passando `sheetState` corretamente
+            onDismissRequest = { showBottomSheet = false },
+            sheetState = sheetState
         ) {
-            // Conteúdo do seu Bottom Sheet aqui
             Column(modifier = Modifier
                 .fillMaxWidth()
                 .padding(18.dp), verticalArrangement = Arrangement.spacedBy(20.dp)) {
                 BottomSheetItem(icon = Icons.Default.ShoppingCart, title = "Adicione um produto") {
                     showBottomSheet = false
-                    navigationController.navigate(Screens.PostProduct.screen) {
+                    navController.navigate(Screens.PostProduct.screen) {
                         popUpTo(0)
                     }
                 }
 
                 BottomSheetItem(icon = Icons.Default.Add, title = "Adicione um pet") {
                     showBottomSheet = false
-                    navigationController.navigate(Screens.PostPet.screen) {
+                    navController.navigate(Screens.PostPet.screen) {
                         popUpTo(0)
                     }
                 }
 
                 BottomSheetItem(icon = Icons.Default.ThumbUp, title = "Adicione uma review") {
                     showBottomSheet = false
-                    navigationController.navigate(Screens.PostReview.screen) {
+                    navController.navigate(Screens.PostReview.screen) {
                         popUpTo(0)
                     }
                 }
@@ -212,18 +212,18 @@ fun BottomSheetItem(icon: ImageVector, title: String, onClick: () -> Unit) {
         horizontalArrangement = Arrangement.spacedBy(12.dp),
         modifier = Modifier
             .clickable { onClick() }
-            .padding(16.dp) // Adicionando padding para toque mais fácil e espaçamento apropriado
+            .padding(16.dp)
     ) {
         Icon(
             icon,
             contentDescription = null,
             tint = GreenJC,
-            modifier = Modifier.size(24.dp) // Ajuste de tamanho do ícone, se necessário
+            modifier = Modifier.size(24.dp)
         )
         Text(
             text = title,
             color = GreenJC,
-            fontSize = 22.sp // Tamanho de fonte apropriado
+            fontSize = 22.sp
         )
     }
 }

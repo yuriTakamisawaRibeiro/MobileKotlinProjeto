@@ -10,16 +10,18 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import com.example.projetomobile.ui.theme.GreenJC
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
+import androidx.navigation.NavHostController
 
 @Composable
-fun Home() {
+fun Home(navController: NavHostController) {
     Box(modifier = Modifier.fillMaxSize()) {
         Column(modifier = Modifier
             .fillMaxSize()
             .align(Alignment.Center),
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally) {
-            Text(text = "Home", fontSize = 30.sp, color = GreenJC)
+
         }
     }
 }

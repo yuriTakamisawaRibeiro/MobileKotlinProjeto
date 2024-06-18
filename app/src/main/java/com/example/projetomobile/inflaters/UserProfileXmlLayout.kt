@@ -21,12 +21,13 @@ import com.example.projetomobile.activities.UpdateEmailActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import androidx.core.content.ContextCompat.startActivity
+import androidx.navigation.NavHostController
 import com.example.projetomobile.activities.AdvancedSettingsActivity
 import com.example.projetomobile.activities.LoginActivity
 import com.example.projetomobile.activities.UpdatePasswordActivity
 
 @Composable
-fun UserProfileXmlLayout() {
+fun UserProfileXmlLayout(navController: NavHostController) {
     val context = LocalContext.current
     val auth = FirebaseAuth.getInstance()
     val currentUser = auth.currentUser
