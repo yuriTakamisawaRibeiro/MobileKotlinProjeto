@@ -16,7 +16,11 @@
         android:theme="@style/Theme.Projetomobile"
         tools:targetApi="31">
         <activity
+<<<<<<< HEAD
             android:name=".activities.PostPetActivity"
+=======
+            android:name=".activities.ProductActivity"
+>>>>>>> 5f825cf360d49c076b0e821e6f75136c8c0f2f68
             android:exported="false" />
         <activity
             android:name=".activities.AdvancedSettingsActivity"
