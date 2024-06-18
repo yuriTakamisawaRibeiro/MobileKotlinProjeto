@@ -19,7 +19,6 @@ fun Home() {
             .align(Alignment.Center),
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally) {
-            Text(text = "Home", fontSize = 30.sp, color = GreenJC)
         }
     }
 }
