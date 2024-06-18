@@ -17,7 +17,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.viewinterop.AndroidView
 import com.example.projetomobile.R
-import com.example.projetomobile.activities.UpdateEmailActivity
+import com.example.projetomobile.activities.UpdateUserDataActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import androidx.core.content.ContextCompat.startActivity
@@ -53,9 +53,9 @@ fun UserProfileXmlLayout(navController: NavHostController) {
         // Atualiza o email no layout
         updateEmailInView(view, emailState.value)
 
-        val updateEmailButton = view.findViewById<Button>(R.id.buttonUpdateEmail)
+        val updateEmailButton = view.findViewById<Button>(R.id.buttonUpdateData)
         updateEmailButton.setOnClickListener {
-            val intent = Intent(context, UpdateEmailActivity::class.java)
+            val intent = Intent(context, UpdateUserDataActivity::class.java)
             updateEmailLauncher.launch(intent)
         }
 

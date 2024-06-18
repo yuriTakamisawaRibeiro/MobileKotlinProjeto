@@ -79,13 +79,10 @@ dependencies {
     // For example, add the dependencies for Firebase Authentication and Cloud Firestore
     implementation("com.google.firebase:firebase-auth-ktx")
     implementation("com.google.firebase:firebase-firestore-ktx")
-<<<<<<< HEAD
     implementation("com.google.firebase:firebase-storage-ktx")
-=======
     implementation(platform("com.google.firebase:firebase-bom:33.1.0"))
     implementation("com.google.firebase:firebase-firestore")
 
->>>>>>> 5f825cf360d49c076b0e821e6f75136c8c0f2f68
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
     implementation(libs.androidx.activity)

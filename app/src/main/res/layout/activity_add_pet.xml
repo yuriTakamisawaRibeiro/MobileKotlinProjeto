@@ -1,102 +1,118 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:gravity="center_vertical|center_horizontal"
     android:padding="20dp">
 
-
-    <TextView
-        android:id="@+id/titleAddPet"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Adicionar Pet"
-        android:textSize="30sp"
-        android:textColor="@color/black"
-        android:layout_marginBottom="20dp"
-        android:gravity="center_horizontal" />
-
-
-    <EditText
-        android:id="@+id/editTextBreed"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Raça"
-        android:inputType="text"
-        android:textSize="18sp"
-        android:textColor="@color/black"
-        android:layout_marginBottom="20dp" />
-
-
-    <EditText
-        android:id="@+id/editTextColor"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Cor"
-        android:inputType="text"
-        android:textSize="18sp"
-        android:textColor="@color/black"
-        android:layout_marginBottom="20dp" />
-
-
-    <EditText
-        android:id="@+id/editTextSize"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Porte (Pequeno, Médio, Grande)"
-        android:inputType="text"
-        android:textSize="18sp"
-        android:textColor="@color/black"
-        android:layout_marginBottom="20dp" />
-
-
-    <Button
-        android:id="@+id/buttonUploadImage"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Selecionar Imagem"
-        android:textSize="18sp"
-        android:layout_marginBottom="20dp" />
-
-    <ImageView
-        android:id="@+id/imageViewPet"
-        android:layout_width="200dp"
-        android:layout_height="200dp"
-        android:scaleType="centerCrop"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginBottom="20dp"
-        android:background="@color/grey" />
-
-
     <LinearLayout
+        android:id="@+id/main"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="vertical"
+        android:gravity="center_vertical|center_horizontal">
 
+        <TextView
+            android:id="@+id/titleAddPet"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Adicionar Pet"
+            android:textSize="30sp"
+            android:textColor="@color/black"
+            android:layout_marginBottom="20dp"
+            android:gravity="center_horizontal" />
+
+        <EditText
+            android:id="@+id/editTextName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Nome"
+            android:inputType="text"
+            android:textSize="18sp"
+            android:textColor="@color/black"
+            android:layout_marginBottom="20dp" />
+
+        <EditText
+            android:id="@+id/editTextBreed"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Raça"
+            android:inputType="text"
+            android:textSize="18sp"
+            android:textColor="@color/black"
+            android:layout_marginBottom="20dp" />
+
+        <EditText
+            android:id="@+id/editTextColor"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Cor"
+            android:inputType="text"
+            android:textSize="18sp"
+            android:textColor="@color/black"
+            android:layout_marginBottom="20dp" />
+
+        <EditText
+            android:id="@+id/editTextSize"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Porte (Pequeno, Médio, Grande)"
+            android:inputType="text"
+            android:textSize="18sp"
+            android:textColor="@color/black"
+            android:layout_marginBottom="20dp" />
+
+        <EditText
+            android:id="@+id/editTextWeight"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Peso (Kg)"
+            android:inputType="number"
+            android:textSize="18sp"
+            android:textColor="@color/black"
+            android:layout_marginBottom="20dp" />
 
         <Button
-            android:id="@+id/buttonCancel"
-            android:layout_width="0dp"
+            android:id="@+id/buttonUploadImage"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Cancelar"
+            android:text="Selecionar Imagem"
             android:textSize="18sp"
-            android:backgroundTint="@color/grey" />
+            android:layout_marginBottom="20dp" />
 
+        <ImageView
+            android:id="@+id/imageViewPet"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:scaleType="centerCrop"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="20dp"
+            android:background="@color/grey" />
 
-        <Button
-            android:id="@+id/buttonSubmit"
-            android:layout_width="0dp"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Enviar"
-            android:textSize="18sp"
-            android:backgroundTint="@color/green"
-            android:layout_marginStart="10dp" />
+            android:orientation="horizontal">
 
+            <Button
+                android:id="@+id/buttonCancel"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Cancelar"
+                android:textSize="18sp"
+                android:backgroundTint="@color/grey" />
+
+            <Button
+                android:id="@+id/buttonSubmit"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Enviar"
+                android:textSize="18sp"
+                android:backgroundTint="@color/green"
+                android:layout_marginStart="10dp" />
+        </LinearLayout>
     </LinearLayout>
-</LinearLayout>
+</ScrollView>

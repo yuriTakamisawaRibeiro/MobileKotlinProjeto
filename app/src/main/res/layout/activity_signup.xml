@@ -21,6 +21,28 @@
         android:textColor="@color/black"/>
 
     <EditText
+        android:id="@+id/signup_name"
+        android:layout_width="350dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="30dp"
+        android:ems="10"
+        android:padding="8dp"
+        android:hint="Nome"
+        android:drawablePadding="8dp"
+        android:inputType="text" />
+
+    <EditText
+        android:id="@+id/signup_phone"
+        android:layout_width="350dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="30dp"
+        android:ems="10"
+        android:padding="8dp"
+        android:hint="Telefone"
+        android:drawablePadding="8dp"
+        android:inputType="phone" />
+
+    <EditText
         android:id="@+id/signup_email"
         android:layout_width="350dp"
         android:layout_height="60dp"

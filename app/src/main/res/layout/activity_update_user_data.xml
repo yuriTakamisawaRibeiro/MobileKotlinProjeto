@@ -8,14 +8,34 @@
     android:orientation="vertical"
     android:gravity="center_vertical|center_horizontal"
     android:padding="20dp"
-    tools:context=".activities.UpdateEmailActivity">
+    tools:context=".activities.UpdateUserDataActivity">
 
     <TextView
-        android:id="@+id/titleUpdateEmail"
+        android:id="@+id/titleUpdateData"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Atualizar e-mail"
+        android:text="Atualizar dados"
         android:textSize="30sp"
+        android:textColor="@color/black"
+        android:layout_marginBottom="20dp" />
+
+    <EditText
+        android:id="@+id/editTextNewName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Nome"
+        android:inputType="text"
+        android:textSize="18sp"
+        android:textColor="@color/black"
+        android:layout_marginBottom="20dp" />
+
+    <EditText
+        android:id="@+id/editTextNewPhone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Telefone"
+        android:inputType="phone"
+        android:textSize="18sp"
         android:textColor="@color/black"
         android:layout_marginBottom="20dp" />
 

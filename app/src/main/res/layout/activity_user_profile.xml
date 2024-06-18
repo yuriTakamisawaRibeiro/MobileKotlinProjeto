@@ -42,10 +42,10 @@
 
 
         <Button
-            android:id="@+id/buttonUpdateEmail"
+            android:id="@+id/buttonUpdateData"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Atualizar Email"
+            android:text="Atualizar dados"
             android:backgroundTint="@color/green"/>
 
 
