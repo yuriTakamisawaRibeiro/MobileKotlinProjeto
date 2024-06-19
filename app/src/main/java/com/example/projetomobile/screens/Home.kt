@@ -1,11 +1,15 @@
 package com.example.projetomobile.screens
 
+import android.util.Log
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Card
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.mutableStateListOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -13,25 +17,39 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
+import com.google.firebase.firestore.FirebaseFirestore
 
 @Composable
 fun Home(navController: NavHostController) {
-    val productList = listOf(
-        Product("Product 1", "Description 1", "100.00"),
-        Product("Product 2", "Description 2", "150.00")
-    )
+    val firestore = FirebaseFirestore.getInstance()
+    val productList = remember { mutableStateListOf<Product>() }
+
+    LaunchedEffect(Unit) {
+        firestore.collection("products")
+            .get()
+            .addOnSuccessListener { querySnapshot ->
+                for (document in querySnapshot.documents) {
+                    val product = document.toObject(Product::class.java)
+                    product?.let { productList.add(it) }
+                }
+            }
+            .addOnFailureListener { exception ->
+                Log.e("Firestore", "Erro ao ler dados: $exception")
+            }
+    }
 
     LazyColumn(
         modifier = Modifier.fillMaxSize()
     ) {
         items(productList) { product ->
-            ProductCard(name = product.name, description = product.description, value = product.value)
+            ProductCard(name = product.name, description = product.description, price = product.price, )
         }
     }
 }
 
+
 @Composable
-fun ProductCard(name: String, description: String, value: String) {
+fun ProductCard(name: String, description: String, price: String) {
     Card(
         modifier = Modifier
             .fillMaxWidth()
@@ -44,9 +62,9 @@ fun ProductCard(name: String, description: String, value: String) {
             Spacer(modifier = Modifier.height(8.dp))
             Text(text = description, fontSize = 14.sp)
             Spacer(modifier = Modifier.height(8.dp))
-            Text(text = "R$ $value", fontSize = 16.sp, color = Color.Gray)
+            Text(text = "R$ $price", fontSize = 16.sp, color = Color.Gray)
         }
     }
 }
 
-data class Product(val name: String, val description: String, val value: String)
+data class Product(val name: String = "", val description: String="", val price: String="")
